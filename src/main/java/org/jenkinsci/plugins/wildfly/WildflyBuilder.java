@@ -161,9 +161,9 @@ public class WildflyBuilder extends Builder {
 
     		listener.getLogger().println("Deploying "+warFilename+" ...");
     		if (server.length() > 0)
-    			result = cli.cmd("deploy "+warPath+" --server-groups="+server" --force");
+    			result = cli.cmd("deploy "+warPath+" --server-groups="+server+" --force");
     		else
-    			result = cli.cmd("deploy "+warPath" --force");
+    			result = cli.cmd("deploy "+warPath+" --force");
     		
     		response = getWildFlyResponse(result);   		
     	            
