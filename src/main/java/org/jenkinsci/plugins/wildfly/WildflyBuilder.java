@@ -161,17 +161,12 @@ public class WildflyBuilder extends Builder {
 
     		listener.getLogger().println("Deploying "+warFilename+" ...");
     		if (server.length() > 0)
-    			result = cli.cmd("deploy "+warPath+" --server-groups="+server);
+    			result = cli.cmd("deploy "+warPath+" --server-groups="+server" --force");
     		else
-    			result = cli.cmd("deploy "+warPath);
+    			result = cli.cmd("deploy "+warPath" --force");
     		
     		response = getWildFlyResponse(result);   		
-    		if (response.indexOf("{\"outcome\" => \"failed\"") >= 0) {
-    			result = cli.cmd("deploy "+warPath + " --force");
-    		}
-            
-            response = getWildFlyResponse(result); 
-            
+    	            
             if (response.indexOf("{\"outcome\" => \"failed\"") >= 0) {
     			listener.fatalError(response);
     			return false;
