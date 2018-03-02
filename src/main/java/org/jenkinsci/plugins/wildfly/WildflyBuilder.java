@@ -167,9 +167,15 @@ public class WildflyBuilder extends Builder {
     		
     		response = getWildFlyResponse(result);   		
     		if (response.indexOf("{\"outcome\" => \"failed\"") >= 0) {
+    			result = cli.cmd("deploy "+warPath + " --force");
+    		}
+            
+            response = getWildFlyResponse(result); 
+            
+            if (response.indexOf("{\"outcome\" => \"failed\"") >= 0) {
     			listener.fatalError(response);
     			return false;
-    		} else
+    		 } else
         		listener.getLogger().println(response);
         	
         	cli.disconnect();    	
